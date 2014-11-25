@@ -3,8 +3,13 @@ package com.androidexample.mvc;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.androidexample.mvc.R.color;
+import com.androidexample.mvc.R.layout;
+
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter.LengthFilter;
+import android.text.Layout.Alignment;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -108,9 +113,11 @@ public class FirstScreen extends Activity {
 //            			   productList.remove(s);
 //            		   }
 //            		} 
+            	//clear list 2...list2.clear();
             	for(ModelProducts d : productList){
                     if(d.getProductName() != null && d.getProductName().contains(search));
-                       //something here
+                       //add that item to list 2
+                    adapter.notifyDataSetChanged();
                 }
             	
                 FirstScreen.this.adapter.getFilter().filter(cs);   
@@ -135,16 +142,16 @@ public class FirstScreen extends Activity {
 		
 		productList.add(new ModelProducts("Unga", "maize flour", 120));
 		productList.add(new ModelProducts("Tuzo", "maize flour", 120));
-		productList.add(0, new ModelProducts("Mumias", "maize flour", 120));
+		productList.add( new ModelProducts("jam", "maize flour", 120));
 		productList.add(new ModelProducts("rice", "Dawati", 170));
 		productList.add(new ModelProducts("soap", "Geisha", 120));
-		productList.add(0, new ModelProducts("Bread", "supa loaf", 50));
-		productList.add(new ModelProducts("keringet", "maize flour", 120));
+		productList.add( new ModelProducts("Bread", "supa loaf", 50));
+		productList.add(new ModelProducts("kiwi", "maize flour", 120));
 		productList.add(new ModelProducts("ilara", "maize flour", 120));
-		productList.add(0, new ModelProducts("sony", "maize flour", 120));
+		productList.add( new ModelProducts("sony", "maize flour", 120));
 		productList.add(new ModelProducts("sugar", "Dawati", 170));
-		productList.add(new ModelProducts("salt", "Geisha", 120));
-		productList.add(0, new ModelProducts("biscuits", "supa loaf", 50));
+		productList.add(new ModelProducts("geisha", "Geisha", 120));
+		productList.add(new ModelProducts("biscuits", "supa loaf", 50));
 		
 		for (int j = 0; j < productList.size(); j++) {
 			// Get probuct data from product data arraylist
@@ -176,19 +183,27 @@ public class FirstScreen extends Activity {
 			final Button btn = new Button(this);
 			btn.setId(j + 1);
 			btn.setText("Add To Cart");
-			btn.setBackgroundResource(R.layout.buttonstyle);
+			btn.setBackgroundResource(R.drawable.buttonstyle);
+			btn.setRight(50);
+			LinearLayout.LayoutParams lp= new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+			lp.setMargins(15, 5, 15, 5);
+			btn.setLayoutParams(lp);
+			btn.setTextColor(color.white);
 
 			final Button btndelete = new Button(this);
 			btndelete.setId(j + 1);
 			btndelete.setText("Delete");
-			btndelete.setBackgroundResource(R.layout.buttonstyle);
+			btndelete.setBackgroundResource(R.drawable.buttonstyle);
+			btn.setRight(50);
+			LinearLayout.LayoutParams lp1= new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+			lp1.setMargins(15, 0, 15, 5);
+			
+			btn.setLayoutParams(lp1);
 
 			// set the layoutParams on the button
 			btndelete.setLayoutParams(params);
 
-			// set the layoutParams on the button
-			btn.setLayoutParams(params);
-
+			
 			final int index = j;
 
 			// Create click listener for dynamically created button
